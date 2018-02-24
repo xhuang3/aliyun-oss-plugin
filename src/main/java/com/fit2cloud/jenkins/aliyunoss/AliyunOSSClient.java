@@ -42,8 +42,7 @@ public class AliyunOSSClient {
 	public static int upload(AbstractBuild<?, ?> build, BuildListener listener,
 							 final String aliyunAccessKey, final String aliyunSecretKey, final String aliyunEndPointSuffix, String bucketName,String expFP,String expVP) throws AliyunOSSException {
 		OSSClient client = new OSSClient(aliyunAccessKey, aliyunSecretKey);
-		String location = client.getBucketLocation(bucketName);
-		String endpoint = "http://" + location + aliyunEndPointSuffix;
+		String endpoint = "http://" + "oss-cn-beijing" + aliyunEndPointSuffix;
 		client = new OSSClient(endpoint, aliyunAccessKey, aliyunSecretKey);
 		int filesUploaded = 0; // Counter to track no. of files that are uploaded
 		try {
@@ -123,7 +122,7 @@ public class AliyunOSSClient {
 						}
 						long endTime = System.currentTimeMillis();
 						listener.getLogger().println("Uploaded object ["+ key + "] in " + getTime(endTime - startTime));
-						listener.getLogger().println("版本下载地址:"+"http://"+bucketName+"."+location+aliyunEndPointSuffix+"/"+key);
+						listener.getLogger().println("版本下载地址:"+"http://"+bucketName+"."+"oss-cn-beijing"+aliyunEndPointSuffix+"/"+key);
 						filesUploaded++;
 					}
 				}else {
